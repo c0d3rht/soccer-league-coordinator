@@ -128,34 +128,6 @@ players = [
     ]
 ]
 
-/// Returns the average height of a team
-func averageHeight(of team: [[String : Any]]) -> Float {
-    var totalHeight: Float = 0
-    
-    for player in team {
-         totalHeight += Float(player["height"] as! Int)
-    }
-    
-    return totalHeight / Float(team.count)
-}
-
-/// Appends letters to the main collection
-func appendLetters(from team: [[String : Any]], name: String, timings: String) {
-    var teamLetters: [String] = []
-    
-    for player in team {
-        let letter =
-            "\nDear \(player["guardians"] as! String),\nYour" +
-            " child \(player["name"] as! String) has been " +
-            "invited to practice with Team \(name) on \(timings)." +
-            "\n\nThanks!"
-        
-        teamLetters.append(letter)
-    }
-    
-    letters.append(contentsOf: teamLetters)
-}
-
 /// Sorts a given collection of players
 func sort(_ players: [[String : Any]]) {
     // If the players can be equally divided to each team,
@@ -213,13 +185,41 @@ func sort(_ players: [[String : Any]]) {
     }
 }
 
+/// Returns the average height of a team
+func averageHeight(of team: [[String : Any]]) -> Int {
+    var totalHeight: Float = 0
+    
+    for player in team {
+        totalHeight += Float(player["height"] as! Int)
+    }
+    
+    return Int((totalHeight / Float(team.count)).rounded(FloatingPointRoundingRule.toNearestOrAwayFromZero))
+}
+
+/// Appends letters to the main collection
+func appendLetters(from team: [[String : Any]], name: String, timings: String) {
+    var teamLetters: [String] = []
+    
+    for player in team {
+        let letter =
+            "\nDear \(player["guardians"] as! String),\nYour" +
+                " child \(player["name"] as! String) has been " +
+                "invited to practice with Team \(name) on \(timings)." +
+        "\n\nThanks!"
+        
+        teamLetters.append(letter)
+    }
+    
+    letters.append(contentsOf: teamLetters)
+}
+
 // The players are sorted into each team
 sort(players)
 
 // The average height of each team is printed to the console
-print("Team Sharks has an average height of \(averageHeight(of: teamSharks))")
-print("Team Dragons has an average height of \(averageHeight(of: teamDragons))")
-print("Team Raptors has an average height of \(averageHeight(of: teamRaptors))")
+print("Team Sharks has an average height of \(averageHeight(of: teamSharks)) inches.")
+print("Team Dragons has an average height of \(averageHeight(of: teamDragons)) inches.")
+print("Team Raptors has an average height of \(averageHeight(of: teamRaptors)) inches.")
 
 // Appends the letters to the main collection
 appendLetters(from: teamSharks, name: "Sharks", timings: "March 17th, 1:00 PM")
