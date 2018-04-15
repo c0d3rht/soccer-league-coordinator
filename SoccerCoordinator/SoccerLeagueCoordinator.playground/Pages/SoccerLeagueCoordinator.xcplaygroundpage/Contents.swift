@@ -146,7 +146,7 @@ func sort(_ players: [[String : Any]]) {
             }
         }
         
-        // The below ensures the proximity of the average heights of all teams
+        // The code below ensures the proximity of the average heights of all teams
         experiencedPlayers.sort(by: { $0["height"] as! Double > $1["height"] as! Double })
         inexperiencedPlayers.sort(by: { $1["height"] as! Double > $0["height"] as! Double })
         
@@ -212,7 +212,7 @@ func printAverageHeights(of teams: [String : [[String : Any]]]) {
 }
 
 /// Returns an array of letters from a particular team.
-func sendLetters(from teamName: String, onDate date: String) -> [String] {
+func sendLetters(from teamName: String, on date: String) -> [String] {
     var teamLetters: [String] = []
     
     if let team = teams[teamName] {
@@ -247,20 +247,26 @@ func receiveLetters() {
             date = "some day"
         }
         
-        unreadLetters.append(contentsOf: sendLetters(from: key, onDate: date))
+        unreadLetters.append(contentsOf: sendLetters(from: key, on: date))
     }
     
     letters.append(contentsOf: unreadLetters)
 }
 
+// The players are sorted into the dictionary 'teams'
 sort(players)
-let teamSharks = teams["Sharks"]!
-let teamDragons = teams["Dragons"]!
-let teamRaptors = teams["Raptors"]!
 
+// The code below prints the required output
 printAverageHeights(of: teams)
-receiveLetters()
 
+receiveLetters()
 for letter in letters {
     print(letter)
 }
+
+// Feel free to uncomment the code below because it was mentioned in the criteria, although it feels irrelevant to the needs at hand (and is also redundant).
+// Personally, it seems more subtle and modular to have a collection of teams instead of separate variables or constants so more teams can be added and updated with ease.
+
+//var teamSharks = teams["Sharks"]!
+//var teamDragons = teams["Dragons"]!
+//var teamRaptors = teams["Raptors"]!
