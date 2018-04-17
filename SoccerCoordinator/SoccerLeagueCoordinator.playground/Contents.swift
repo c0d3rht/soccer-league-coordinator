@@ -208,7 +208,7 @@ func printAverageHeights(of teams: [String : [[String : Any]]]) {
 }
 
 /// Returns an array of letters from a particular team.
-func sendLetters(from teamName: String, on date: String) -> [String] {
+func sendLetters(from teamName: String, onDate date: String) -> [String] {
     var teamLetters: [String] = []
     
     for player in teams[teamName]! {
@@ -241,7 +241,7 @@ func receiveLetters() {
             date = "some day"
         }
         
-        unreadLetters.append(contentsOf: sendLetters(from: key, on: date))
+        unreadLetters.append(contentsOf: sendLetters(from: key, onDate: date))
     }
     
     letters.append(contentsOf: unreadLetters)
@@ -253,7 +253,7 @@ sort(players)
 // The average heights of all teams are printed
 printAverageHeights(of: teams)
 
-// The collection 'letters' is updated and printed to the console
+// The collection 'letters' is updated and each letter is printed
 receiveLetters()
 for letter in letters {
     print(letter)
